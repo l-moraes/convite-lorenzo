@@ -1,0 +1,737 @@
+/* ========================================
+   CONFIGURACOES EDITAVEIS - CORES
+   ======================================== */
+:root {
+  --sky-blue: #2196F3;
+  --sky-dark: #1565C0;
+  --woody-yellow: #FFD54F;
+  --woody-brown: #5D4037;
+  --buzz-green: #66BB6A;
+  --buzz-purple: #7E57C2;
+  --jessie-red: #E53935;
+  --cloud-white: #ffffff;
+  --star-gold: #FFC107;
+  --text-dark: #3E2723;
+  --text-light: #ffffff;
+}
+
+/* ========================================
+   RESET & BASE
+   ======================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  font-family: 'Poppins', sans-serif;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+  background: #000;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+}
+
+/* ========================================
+   PAGINA DE CAPA (COVER) - VIDEO
+   ======================================== */
+#cover {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  cursor: pointer;
+  transition: opacity 1s ease;
+  overflow: hidden;
+}
+
+#cover.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.cover-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.tap-hint {
+  position: absolute;
+  left: 50%;
+  bottom: calc(32px + env(safe-area-inset-bottom));
+  z-index: 2;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(13px, 3.8vw, 17px);
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.55);
+  padding: 12px 22px;
+  border-radius: 30px;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  animation: tapHintPulse 1.5s ease-in-out infinite;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+  white-space: nowrap;
+  max-width: calc(100vw - 32px);
+}
+
+@keyframes tapHintPulse {
+  0%, 100% { opacity: 0.6; transform: translateX(-50%) scale(1); }
+  50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+}
+
+/* ========================================
+   VIDEOS DE TRANSICAO
+   ======================================== */
+.video-screen {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  z-index: 90;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-screen.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 110;
+}
+
+.video-screen video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+/* Indicador de carregamento/inicio para mobile */
+.play-indicator {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 84px;
+  height: 84px;
+  border-radius: 50%;
+  background: rgba(255, 213, 79, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.5),
+              0 0 0 4px rgba(255,255,255,0.3);
+  z-index: 3;
+  pointer-events: none;
+  animation: playPulse 2s ease-in-out infinite;
+}
+
+.play-indicator::after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-left: 26px solid #5D4037;
+  border-top: 18px solid transparent;
+  border-bottom: 18px solid transparent;
+  margin-left: 8px;
+}
+
+@keyframes playPulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); box-shadow: 0 8px 30px rgba(0,0,0,0.5), 0 0 0 4px rgba(255,255,255,0.3); }
+  50% { transform: translate(-50%, -50%) scale(1.08); box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 0 0 12px rgba(255,255,255,0.15); }
+}
+
+.cover-title {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(28px, 8vw, 52px);
+  color: var(--woody-yellow);
+  text-shadow: 3px 3px 0 var(--woody-brown),
+               -1px -1px 0 var(--woody-brown),
+               0 0 30px rgba(255, 213, 79, 0.3);
+  text-align: center;
+  letter-spacing: 3px;
+  margin-bottom: 10px;
+  animation: coverPulse 2s ease-in-out infinite;
+}
+
+@keyframes coverPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.cover-subtitle {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(16px, 4.5vw, 24px);
+  color: var(--cloud-white);
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+  margin-bottom: 40px;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.cover-tap {
+  font-family: 'Poppins', sans-serif;
+  font-size: clamp(14px, 3.5vw, 18px);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.4);
+  animation: tapPulse 1.5s ease-in-out infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.cover-tap .icon-tap {
+  font-size: 30px;
+}
+
+@keyframes tapPulse {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+}
+
+.sound-hint {
+  font-size: clamp(11px, 2.8vw, 14px);
+  color: rgba(255, 255, 255, 0.75);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ========================================
+   PAGINA PRINCIPAL DO CONVITE
+   ======================================== */
+#invitation {
+  position: fixed;
+  inset: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  opacity: 0;
+  transition: opacity 1s ease;
+  background: url('../assets/background.jpg') center top / cover;
+  background-attachment: scroll;
+}
+
+#invitation.visible {
+  opacity: 1;
+}
+
+/* Conteudo principal */
+.content {
+  position: relative;
+  z-index: 1;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: calc(40px + env(safe-area-inset-top)) 20px calc(60px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ---- Header / Hero ---- */
+.hero {
+  text-align: center;
+  margin-bottom: 10px;
+  animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.hero-emoji {
+  font-size: 60px;
+  display: block;
+  margin-bottom: 5px;
+  animation: gentleFloat 3s ease-in-out infinite;
+}
+
+@keyframes gentleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.hero-pretitle {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: clamp(14px, 3.5vw, 18px);
+  color: var(--cloud-white);
+  text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.hero-name {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(58px, 16vw, 100px);
+  color: var(--woody-yellow);
+  text-shadow: 4px 4px 0 var(--woody-brown),
+               -2px -2px 0 var(--woody-brown),
+               2px -2px 0 var(--woody-brown),
+               -2px 2px 0 var(--woody-brown),
+               0 0 40px rgba(255, 213, 79, 0.3);
+  line-height: 1;
+  letter-spacing: 4px;
+}
+
+.hero-age {
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(24px, 7vw, 38px);
+  color: var(--cloud-white);
+  text-shadow: 2px 2px 0 var(--jessie-red),
+               0 0 10px rgba(0,0,0,0.3);
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.hero-age .age-number {
+  font-size: clamp(48px, 14vw, 80px);
+  color: var(--jessie-red);
+  text-shadow: 3px 3px 0 var(--woody-brown),
+               0 0 20px rgba(229, 57, 53, 0.3);
+}
+
+/* Frase iconica */
+.catchphrase {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(20px, 5.5vw, 30px);
+  color: var(--cloud-white);
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.4),
+               0 0 15px rgba(102, 187, 106, 0.5);
+  text-align: center;
+  margin: 15px 0 30px;
+  letter-spacing: 2px;
+  animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+/* ---- Card principal ---- */
+.card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(15px);
+  border-radius: 24px;
+  padding: 35px 25px;
+  width: 100%;
+  box-shadow: 0 15px 50px rgba(0,0,0,0.15),
+              0 0 0 3px var(--woody-yellow),
+              0 0 0 6px var(--jessie-red);
+  animation: fadeInUp 1s ease-out 0.9s both;
+  margin-bottom: 25px;
+}
+
+.card-message {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(16px, 4vw, 20px);
+  color: var(--text-dark);
+  text-align: center;
+  line-height: 1.6;
+  margin-bottom: 25px;
+}
+
+.card-message strong {
+  color: var(--jessie-red);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 25px 0;
+  color: var(--woody-yellow);
+  font-size: 18px;
+}
+
+.divider-line {
+  flex: 1;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--woody-yellow), transparent);
+}
+
+/* Detalhes do evento */
+.event-details {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px;
+  background: linear-gradient(135deg, #fff9e6, #fff3cc);
+  border-radius: 16px;
+  border-left: 4px solid var(--woody-yellow);
+}
+
+.detail-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--woody-yellow);
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(255, 193, 7, 0.3);
+}
+
+.detail-text {
+  flex: 1;
+}
+
+.detail-label {
+  font-family: 'Fredoka One', cursive;
+  font-size: 13px;
+  color: var(--woody-brown);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 3px;
+}
+
+.detail-value {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(15px, 3.8vw, 18px);
+  color: var(--text-dark);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+/* ---- Botoes de acao ---- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  animation: fadeInUp 1s ease-out 1.2s both;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 16px;
+  font-family: 'Fredoka One', cursive;
+  font-size: clamp(15px, 3.8vw, 18px);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+  letter-spacing: 0.5px;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-location {
+  background: linear-gradient(135deg, var(--sky-blue), var(--sky-dark));
+  color: white;
+}
+
+.btn-location:hover {
+  box-shadow: 0 8px 28px rgba(33, 150, 243, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-confirm {
+  background: linear-gradient(135deg, var(--buzz-green), #43A047);
+  color: white;
+}
+
+.btn-confirm:hover {
+  box-shadow: 0 8px 28px rgba(102, 187, 106, 0.4);
+  transform: translateY(-2px);
+}
+
+.btn-icon {
+  font-size: 22px;
+}
+
+/* ---- Personagens flutuantes ---- */
+.floating-chars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.float-char {
+  position: absolute;
+  font-size: 35px;
+  opacity: 0.2;
+  animation: floatChar 20s linear infinite;
+}
+
+@keyframes floatChar {
+  0% { transform: translateY(100vh) rotate(0deg); }
+  100% { transform: translateY(-100px) rotate(360deg); }
+}
+
+/* ---- Rodape ---- */
+.footer {
+  text-align: center;
+  margin-top: 30px;
+  animation: fadeInUp 1s ease-out 1.5s both;
+}
+
+.footer-phrase {
+  font-family: 'Bangers', cursive;
+  font-size: clamp(22px, 6vw, 32px);
+  color: var(--woody-yellow);
+  text-shadow: 2px 2px 0 var(--woody-brown);
+  letter-spacing: 2px;
+}
+
+.footer-emoji {
+  font-size: 50px;
+  display: block;
+  margin-top: 10px;
+  animation: gentleFloat 2.5s ease-in-out infinite;
+}
+
+.footer-note {
+  font-size: 13px;
+  color: var(--cloud-white);
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+  margin-top: 20px;
+}
+
+/* ---- Botao de som ---- */
+.sound-toggle {
+  position: fixed;
+  top: calc(16px + env(safe-area-inset-top));
+  right: calc(16px + env(safe-area-inset-right));
+  z-index: 999;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.4);
+  backdrop-filter: blur(10px);
+  color: white;
+  font-size: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sound-toggle:active {
+  transform: scale(0.9);
+}
+
+.sound-toggle:hover {
+  background: rgba(0,0,0,0.5);
+}
+
+/* ---- Animacoes gerais ---- */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scroll decorativo */
+#invitation::-webkit-scrollbar { width: 6px; }
+#invitation::-webkit-scrollbar-track { background: transparent; }
+#invitation::-webkit-scrollbar-thumb { background: var(--woody-yellow); border-radius: 3px; }
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+@media (max-width: 380px) {
+  .card { padding: 25px 18px; }
+  .detail-item { padding: 10px; gap: 10px; }
+}
+
+@media (min-width: 768px) {
+  .content { padding: 60px 30px 80px; }
+}
+
+/* ========================================
+   WOODY COM IMAGEM REAL
+   ======================================== */
+.woody-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* Imagem do Woody */
+.woody-img {
+  width: clamp(160px, 45vw, 220px);
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+  filter: drop-shadow(0 8px 25px rgba(0,0,0,0.3));
+  animation: woodyBounce 3s ease-in-out infinite;
+  transition: filter 0.3s ease;
+}
+
+/* Efeito sutil quando esta "falando" */
+.woody-img.talking {
+  animation: woodyTalk 3s ease-in-out infinite;
+}
+
+@keyframes woodyBounce {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-8px) scale(1.02); }
+}
+
+@keyframes woodyTalk {
+  0%, 100% { transform: translateY(0) scale(1); }
+  25% { transform: translateY(-5px) scale(1.03); }
+  50% { transform: translateY(-8px) scale(1.01); }
+  75% { transform: translateY(-3px) scale(1.04); }
+}
+
+/* Balao de fala */
+.speech-bubble {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 14px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  max-width: 300px;
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: bubblePop 0.4s ease-out;
+  border: 3px solid var(--woody-yellow);
+}
+
+.speech-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 12px solid transparent;
+  border-right: 12px solid transparent;
+  border-top: 16px solid white;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+}
+
+.speech-bubble::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 14px solid transparent;
+  border-right: 14px solid transparent;
+  border-top: 19px solid var(--woody-yellow);
+}
+
+@keyframes bubblePop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.speech-text {
+  font-family: 'Baloo 2', cursive;
+  font-size: clamp(14px, 3.8vw, 17px);
+  color: var(--text-dark);
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.speech-text .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1em;
+  background: var(--woody-brown);
+  margin-left: 2px;
+  animation: blink 0.6s step-end infinite;
+  vertical-align: text-bottom;
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
+/* Woody na capa - close up */
+.cover-woody {
+  margin-bottom: 10px;
+}
+
+.cover-woody .woody-img {
+  width: clamp(140px, 40vw, 200px);
+  border-radius: 50%;
+  border: 4px solid var(--woody-yellow);
+  box-shadow: 0 0 0 4px var(--jessie-red),
+              0 8px 30px rgba(0,0,0,0.3);
+}
+
+.cover-woody .speech-bubble {
+  padding: 10px 16px;
+  min-height: 42px;
+}
+
+/* Woody no convite principal - corpo */
+.invite-woody {
+  animation: fadeInUp 1s ease-out 0.5s both;
+  margin: 0 0 25px;
+}
+
+.invite-woody .woody-img {
+  width: clamp(180px, 50vw, 260px);
+  border-radius: 16px;
+  border: 4px solid var(--woody-yellow);
+  box-shadow: 0 0 0 4px var(--woody-brown),
+              0 10px 35px rgba(0,0,0,0.25);
+}
+
+/* Efeito de particulas */
+.particle {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  z-index: 0;
+  animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
+}

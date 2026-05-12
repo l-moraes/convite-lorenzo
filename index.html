@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#000000" />
+  <title>Convite - Lorenzo 5 Anos | Toy Story</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Fredoka+One&family=Poppins:wght@300;400;600;700&family=Baloo+2:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+
+<body>
+
+  <!-- ============================================
+       CAPA DO CONVITE - VIDEO PORTA
+       ============================================ -->
+  <div id="cover">
+    <video
+      id="videoPorta"
+      class="cover-video"
+      autoplay
+      muted
+      loop
+      playsinline
+      webkit-playsinline
+      disablepictureinpicture
+      disableremoteplayback
+      preload="auto">
+    </video>
+    <div class="tap-hint">
+      <span>👆</span>
+      <span>Toque para abrir o convite</span>
+    </div>
+  </div>
+
+  <!-- ============================================
+       VIDEO 2 - CONVIDA
+       ============================================ -->
+  <div class="video-screen" id="screenConvida">
+    <video
+      id="videoConvida"
+      playsinline
+      webkit-playsinline
+      disablepictureinpicture
+      disableremoteplayback
+      preload="auto">
+    </video>
+  </div>
+
+  <!-- ============================================
+       VIDEO 3 - COMEMORACAO
+       ============================================ -->
+  <div class="video-screen" id="screenComemoracao">
+    <video
+      id="videoComemoracao"
+      playsinline
+      webkit-playsinline
+      disablepictureinpicture
+      disableremoteplayback
+      preload="auto">
+    </video>
+  </div>
+
+  <!-- ============================================
+       BOTAO DE SOM
+       ============================================ -->
+  <button class="sound-toggle" id="soundToggle">🔇</button>
+
+  <!-- ============================================
+       CONVITE PRINCIPAL
+       ============================================ -->
+  <div id="invitation">
+
+    <!-- Personagens flutuando no fundo -->
+    <div class="floating-chars" id="floatingChars"></div>
+
+    <!-- Conteudo -->
+    <div class="content">
+
+      <!-- =====================
+           HERO - NOME E IDADE
+           =====================
+           EDITAVEL: Altere o nome e a idade abaixo -->
+      <div class="hero">
+        <span class="hero-emoji">🤠</span>
+        <div class="hero-pretitle">Venha comemorar com</div>
+        <div class="hero-name">Lorenzo</div>
+        <div class="hero-age">
+          <span class="age-number">5</span>
+          <span>aninhos!</span>
+        </div>
+      </div>
+
+      <!-- FRASE ICONICA TOY STORY -->
+      <div class="catchphrase">
+        🚀 Ao infinito... e além! 🌟
+      </div>
+
+      <!-- =====================
+           WOODY FALANDO (foto corpo)
+           ===================== -->
+      <div class="woody-container invite-woody">
+        <div class="speech-bubble">
+          <div class="speech-text" id="inviteSpeech"></div>
+        </div>
+        <img src="assets/personagens.jpg" alt="Woody" class="woody-img" id="inviteWoodyImg" />
+      </div>
+
+      <!-- =====================
+           CARD COM DETALHES
+           ===================== -->
+      <div class="card">
+
+        <!-- EDITAVEL: Mensagem do convite -->
+        <div class="card-message">
+          O <strong>Lorenzo</strong> esta preparando a maior aventura do
+          velho oeste e do espaco sideral!<br>
+          Venha fazer parte dessa missão especial! 🎈
+        </div>
+
+        <div class="divider">
+          <div class="divider-line"></div>
+          <span>⭐</span>
+          <div class="divider-line"></div>
+        </div>
+
+        <!-- EDITAVEL: Detalhes do evento -->
+        <div class="event-details">
+
+          <!-- Data -->
+          <div class="detail-item">
+            <div class="detail-icon">📅</div>
+            <div class="detail-text">
+              <div class="detail-label">Data</div>
+              <div class="detail-value">Sábado, 27 de Junho de 2026</div>
+            </div>
+          </div>
+
+          <!-- Horario -->
+          <div class="detail-item">
+            <div class="detail-icon">🕐</div>
+            <div class="detail-text">
+              <div class="detail-label">Horario</div>
+              <div class="detail-value">14h00</div>
+            </div>
+          </div>
+
+          <!-- Local -->
+          <div class="detail-item">
+            <div class="detail-icon">📍</div>
+            <div class="detail-text">
+              <div class="detail-label">Local</div>
+              <div class="detail-value">Helbor Bella Vita 2<br>
+                <span style="font-size: 14px; font-weight: 400; color: #666;">
+                  Rua Jacofer, 161 - Limão, São Paulo - SP
+                </span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- =====================
+           BOTOES DE ACAO
+           ===================== -->
+      <div class="actions">
+
+        <!-- EDITAVEL: Link do Google Maps -->
+        <a href="https://maps.app.goo.gl/pHGnsWQ4jrqAgaeg9"
+           target="_blank"
+           class="btn btn-location"
+           onclick="event.stopPropagation()">
+          <span class="btn-icon">🗺️</span>
+          <span>Ver no Mapa</span>
+        </a>
+
+        <!-- Numero do WhatsApp vem de js/config.local.js (nao versionado) -->
+        <a id="btn-whatsapp"
+           href="#"
+           target="_blank"
+           class="btn btn-confirm"
+           onclick="event.stopPropagation()">
+          <span class="btn-icon">✅</span>
+          <span>Confirmar Presenca</span>
+        </a>
+
+      </div>
+
+      <!-- RODAPE -->
+      <div class="footer">
+        <div class="footer-phrase">Ha um amigo em mim! 🤝</div>
+        <span class="footer-emoji">🧸</span>
+        <div class="footer-note">Esperamos voce, xerife! 🌟</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============================================
+       AUDIO DE FUNDO
+       ============================================ -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="assets/musica.mp3" type="audio/mpeg" />
+  </audio>
+
+  <!-- ============================================
+       SCRIPTS - ordem importa (config -> features -> entrypoint)
+       ============================================ -->
+  <script src="js/config.js" defer></script>
+  <script src="js/config.local.js" defer></script>
+  <script src="js/music.js" defer></script>
+  <script src="js/effects.js" defer></script>
+  <script src="js/woody.js" defer></script>
+  <script src="js/videos.js" defer></script>
+  <script src="js/main.js" defer></script>
+
+</body>
+</html>
