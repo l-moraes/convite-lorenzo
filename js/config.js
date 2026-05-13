@@ -25,7 +25,7 @@
       "Abre o convite ai! 🎁",
       "Tem uma festa chegando! 🎉",
       "Toca aqui, xerife! 👆",
-      "O Lorenzo ta chamando! 🌟"
+      "O Lorenzo tá chamando! 🌟"
     ],
 
     // Frases que o Woody fala no convite principal.
@@ -35,7 +35,9 @@
       "O Lorenzo vai fazer 5 anos! 🎂",
       "Venha pra essa aventura! 🌟",
       "Essa festa vai ser demais! 🤩",
-      "Yeehaw! Te espero lá! 🤠"
+      "Yeehaw! Te espero lá! 🤠",
+      "Tem uma cobra na minha bota! 🐍",
+
     ],
 
     // Emojis usados nas decoracoes animadas.
@@ -52,7 +54,7 @@
     // que NAO e versionado. Veja js/config.local.example.js.
     whatsapp: {
       number: '',                                                  // sobrescrito por config.local.js
-      message: 'Oi! Confirmo presença na festa do Lorenzo!'      // pode sobrescrever tambem
+      message: 'Oi! Confirmo presença na festa do Lorenzo!'      
     }
   };
 })(window);

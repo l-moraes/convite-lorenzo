@@ -122,5 +122,16 @@
     startSequence();
   });
 
+  // Permite pular o video atual com um toque -> dispara 'ended' e o fluxo segue.
+  function setupSkipOnClick(screenEl, videoEl) {
+    screenEl.addEventListener('click', function (e) {
+      if (e.target.closest('.sound-toggle')) return;
+      if (!screenEl.classList.contains('active')) return;
+      videoEl.dispatchEvent(new Event('ended'));
+    });
+  }
+  setupSkipOnClick(screenConvida, videoConvida);
+  setupSkipOnClick(screenComemoracao, videoComemoracao);
+
   global.AppVideos = { startSequence };
 })(window);
