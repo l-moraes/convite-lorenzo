@@ -31,13 +31,11 @@
     // Frases que o Woody fala no convite principal.
     invitePhrases: [
       "Amigo estou aqui! 🎶",
-      "Ao infinito e além! 🚀",
       "O Lorenzo vai fazer 5 anos! 🎂",
       "Venha pra essa aventura! 🌟",
       "Essa festa vai ser demais! 🤩",
       "Yeehaw! Te espero lá! 🤠",
       "Tem uma cobra na minha bota! 🐍",
-
     ],
 
     // Emojis usados nas decoracoes animadas.
